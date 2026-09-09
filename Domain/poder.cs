@@ -3,7 +3,7 @@ public class Poder
     public nivelPoder Nivel { get; set; }
     public string Tipo { get; set; }
 
-    public string nombre { get; set; }
+    public string Nombre { get; set; }
 
 }
 
