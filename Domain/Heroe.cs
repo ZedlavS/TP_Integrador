@@ -1,5 +1,7 @@
 public class Heroe
 {
+
+    public int Id { get; set; }
     public string Nombre { get; set; }
     public string IdentidadSecreta { get; set; }
     public int CantidadInicidentes { get; set; }
@@ -7,7 +9,7 @@ public class Heroe
     public Poder Poder { get; set; }
     public int NivelPoder { get; set; }
     public EstadoHeroe Estado { get; set; } = EstadoHeroe.Activo;
-    public enum EstadoHeroea
+    public enum EstadoHeroe
     {
         Activo,
         Inactivo,
