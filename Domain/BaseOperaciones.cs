@@ -1,4 +1,4 @@
 public class BaseOperaciones
 {
-    private float Ubicacion;
+    private float Ubicacion { get; set; }
 }
