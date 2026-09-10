@@ -1,43 +1,41 @@
-using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Agregar servicios para Controllers y convertir Enums a texto en JSON
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
-
-// 2. Configurar la documentación interactiva de Swagger / OpenAPI
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "API Sistema de Emergencias",
-        Version = "v1",
-        Description = "Punto de entrada RESTful para Héroes, Equipos, Incidentes y Central"
-    });
-});
+// Add services to the container.
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// 3. Habilitar la pantalla gráfica de Swagger al ejecutar
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Emergencias v1");
-    });
+    app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
 
-// 4. Mapear las rutas definidas en los controladores
-app.MapControllers();
+var summaries = new[]
+{
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
+app.MapGet("/weatherforecast", () =>
+{
+    var forecast =  Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
+    return forecast;
+})
+.WithName("GetWeatherForecast");
 
 app.Run();
+
+record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}

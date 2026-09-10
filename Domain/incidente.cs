@@ -1,4 +1,5 @@
-public class Incidente
+namespace.TuProyecto.Dominio{
+    public class Incidente
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
@@ -39,3 +40,6 @@ public class Incidente
             }
         }
     }
+
+}
+

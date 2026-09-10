@@ -1,27 +1,29 @@
 using System.Collections.Generic;
 
-public class BaseOperaciones
+namespace TuProyecto.Dominio
 {
-    public int Id { get; set; }
-    public string Nombre { get; set; }
-    public Zona ZonaUbicacion { get; set; }
-    public List<Heroe> HeroesResidentes { get; set; } = new List<Heroe>();
-
-    public BaseOperaciones() { }
-
-    public BaseOperaciones(string nombre, Zona zona)
+    public class BaseOperaciones
     {
-        Nombre = nombre;
-        ZonaUbicacion = zona;
-    }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public Zona ZonaUbicacion { get; set; }
+        public List<Heroe> HeroesResidentes { get; set; } = new List<Heroe>();
 
-    public void AgregarHeroe(Heroe heroe)
-    {
-        if (heroe != null && !HeroesResidentes.Contains(heroe))
+        public BaseOperaciones() { }
+
+        public BaseOperaciones(string nombre, Zona zona)
         {
-            HeroesResidentes.Add(heroe);
+            Nombre = nombre;
+            ZonaUbicacion = zona;
+        }
+
+        public void AgregarHeroe(Heroe heroe)
+        {
+            if (heroe != null && !HeroesResidentes.Contains(heroe))
+            {
+                HeroesResidentes.Add(heroe);
+            }
         }
     }
 }
-    private float Ubicacion { get; set; }
 

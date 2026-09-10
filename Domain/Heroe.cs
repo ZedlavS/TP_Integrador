@@ -1,4 +1,5 @@
-public class Heroe
+namespace TuProyecto.Dominio{
+    public class Heroe
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -50,4 +51,8 @@ public class Heroe
             }
         }
     }
+
+
+
+}
 

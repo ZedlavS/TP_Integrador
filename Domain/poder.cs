@@ -1,14 +1,20 @@
-public class Poder
-{
-    public int Id { get; set; }
-    public string Nombre { get; set; }
-    public string Tipo { get; set; } // Ejemplo: Fuerza, Velocidad, Telekinesis, Vuelo
+namespace.TuProyecto.Dominio{
 
-    public Poder() { }
-
-    public Poder(string nombre, string tipo)
+        public class Poder
     {
-        Nombre = nombre;
-        Tipo = tipo;
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Tipo { get; set; } // Ejemplo: Fuerza, Velocidad, Telekinesis, Vuelo
+
+        public Poder() { }
+
+        public Poder(string nombre, string tipo)
+        {
+            Nombre = nombre;
+            Tipo = tipo;
+        }
     }
+
+
 }
+

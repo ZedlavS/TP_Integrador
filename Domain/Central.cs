@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-public class Central
+namespace TuProyecto.Dominio{
+    public class Central
 {
     public int Id { get; set; }
     public string Nombre { get; set; }
@@ -64,4 +64,6 @@ public class Central
         incidente.IniciarIncidente();
         return true;
     }
+}
+
 }

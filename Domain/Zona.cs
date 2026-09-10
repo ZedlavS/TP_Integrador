@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-public class Zona
+namespace.TuProyecto.Dominio{
+
+    public class Zona
 {
     public int Id { get; set; }
     public string Nombre { get; set; }
@@ -11,4 +13,6 @@ public class Zona
     {
         Nombre = nombre;
     }
+}
+
 }

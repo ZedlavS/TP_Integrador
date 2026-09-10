@@ -1,0 +1,9 @@
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.csproj.AssemblyReference.cache
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.AssemblyInfoInputs.cache
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.AssemblyInfo.cs
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\admin\Desktop\Superheroes\TP_Integrador\obj\Debug\net9.0\TP_Integrador.sourcelink.json
