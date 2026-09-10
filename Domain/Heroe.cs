@@ -1,17 +1,30 @@
-namespace TuProyecto.Dominio{
+using System;
+using System.Collections.Generic;
+
+namespace TuProyecto.Dominio
+{
     public class Heroe
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string IdentidadSecreta { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string IdentidadSecreta { get; set; } = string.Empty;
         public int CantidadIncidentes { get; set; }
         public int CantidadExitos { get; set; }
-        public Poder Poder { get; set; }
         public int NivelPoder { get; set; }
+        public List<Poder> Poderes { get; set; } = new List<Poder>();
         public EstadoHeroe Estado { get; set; } = EstadoHeroe.Disponible;
 
-        // Propiedad calculada requerida por la clase Equipo
+        // Propiedad calculada para las Estrellas
         public int Estrellas => CalcularEstrellas();
+
+        public Heroe() { }
+
+        public Heroe(string nombre, string identidadSecreta, int nivelPoder)
+        {
+            Nombre = nombre;
+            IdentidadSecreta = identidadSecreta;
+            NivelPoder = nivelPoder;
+        }
 
         public int CalcularEstrellas()
         {
@@ -30,7 +43,7 @@ namespace TuProyecto.Dominio{
             return (int)Math.Round(efectividad);
         }
 
-        public void RecibirDaño()
+        public void RecibirDano()
         {
             Estado = EstadoHeroe.Herido;
         }
@@ -51,8 +64,5 @@ namespace TuProyecto.Dominio{
             }
         }
     }
-
-
-
 }
 

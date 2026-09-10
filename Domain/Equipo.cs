@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace TuProyecto.Dominio{
+namespace TuProyecto.Dominio
+{
     public class Equipo
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = string.Empty;
         public List<Heroe> Heroes { get; set; } = new List<Heroe>();
+        public List<Zona> Zonas { get; set; } = new List<Zona>();
         public EstadoEquipo EstadoActual { get; set; } = EstadoEquipo.Disponible;
 
         private const int MIN_INTEGRANTES = 2;
         private const int MAX_INTEGRANTES = 5;
 
-        public Equipo() { } // Requerido para Entity Framework / Serialización
+        public Equipo() { }
 
-        public Equipo(string nombre, List<Heroe> heroes)
+        public Equipo(string nombre, List<Heroe> heroes, List<Zona> zonas)
         {
             if (heroes == null || heroes.Count < MIN_INTEGRANTES || heroes.Count > MAX_INTEGRANTES)
             {
@@ -24,6 +25,7 @@ namespace TuProyecto.Dominio{
 
             Nombre = nombre;
             Heroes = heroes;
+            Zonas = zonas ?? new List<Zona>();
             EstadoActual = EstadoEquipo.Disponible;
         }
 
@@ -66,7 +68,4 @@ namespace TuProyecto.Dominio{
             return IntegrantesDisp().Count >= MIN_INTEGRANTES;
         }
     }
-
-
 }
-

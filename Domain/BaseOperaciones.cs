@@ -5,8 +5,8 @@ namespace TuProyecto.Dominio
     public class BaseOperaciones
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public Zona ZonaUbicacion { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public Zona ZonaUbicacion { get; set; } = new Zona ();
         public List<Heroe> HeroesResidentes { get; set; } = new List<Heroe>();
 
         public BaseOperaciones() { }

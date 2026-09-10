@@ -2,14 +2,14 @@ namespace TuProyecto.Dominio{
     public class Incidente
     {
         public int Id { get; set; }
-        public string Descripcion { get; set; }
-        public string ContactoNombre { get; set; }
+        public string Descripcion { get; set; } = string.Empty;
+        public string ContactoNombre { get; set; } = string.Empty;
         public int ContactoNumero { get; set; }
         public double Ubicacion { get; set; }
         public int NivelPrioridad { get; set; }
-        public string Tipo { get; set; }
-        public int NivelDificultad { get; set; }
-        public string TipoPoder { get; set; }
+        public string Tipo { get; set; } = string.Empty;
+        public int NivelDificultad { get; set; } 
+        public string TipoPoder { get; set; } = string.Empty;
         
         public EstadoIncidente EstadoActual { get; set; } = EstadoIncidente.NoHecho;
 
