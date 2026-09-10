@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace.TuProyecto.Dominio{
+namespace TuProyecto.Dominio{
 
     public class Zona
 {

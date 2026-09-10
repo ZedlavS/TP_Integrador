@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TP_Integrador")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bd7fb43742a6c34823b5ae8efee3a63c9d2794f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44132f562ae528dc47171003c3237d0fbe4eceb1")]
 [assembly: System.Reflection.AssemblyProductAttribute("TP_Integrador")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TP_Integrador")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

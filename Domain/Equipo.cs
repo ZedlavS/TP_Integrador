@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Equipo
+namespace TuProyecto.Dominio{
+    public class Equipo
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -65,3 +66,7 @@ public class Equipo
             return IntegrantesDisp().Count >= MIN_INTEGRANTES;
         }
     }
+
+
+}
+
