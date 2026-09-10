@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System.Collections.Generic;
 
 public class Zona
@@ -39,4 +40,10 @@ public class Zona
             EquiposHabituales.Remove(e);
         }
     }
+=======
+public class Zona
+{
+    public string Nombre { get; set; }
+    public float Ubicacion { get; set; }
+>>>>>>> 85ea045556963966cdb213acfe3f522f6a1b4971
 }
