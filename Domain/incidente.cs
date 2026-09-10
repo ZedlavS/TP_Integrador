@@ -1,32 +1,41 @@
-public class incidente{
-    public String Descripcion{get; set;}
-    public String ContactoNombre{get; set;}
-    public Int  ContactoNumero{get;set;}
-    public Float Ubicacion{get;set;}
-    public Int NivelPrioridad{get;set;}
-    public String Tipo{get;set;}
-    public Int NivelDificultad{get;set;}
-    public String TipoPoder{get;set;}
-    public enum Estado{
-         Hecho,
-         NoHecho,
-         EnCurso,
-    }
-     public void IniciarIncidente()
+public class Incidente
     {
-        if (EstadoActual == Estado.NoHecho)
+        public int Id { get; set; }
+        public string Descripcion { get; set; }
+        public string ContactoNombre { get; set; }
+        public int ContactoNumero { get; set; }
+        public double Ubicacion { get; set; }
+        public int NivelPrioridad { get; set; }
+        public string Tipo { get; set; }
+        public int NivelDificultad { get; set; }
+        public string TipoPoder { get; set; }
+        
+        public EstadoIncidente EstadoActual { get; set; } = EstadoIncidente.NoHecho;
+
+        // Regla de negocio: Umbral para emergencia general (ejemplo: dificultad > 8)
+        private const int UMBRAL_EMERGENCIA_GENERAL = 8;
+
+        /// <summary>
+        /// Evalúa si el incidente requiere la asignación de dos equipos en lugar de uno.
+        /// </summary>
+        public bool EsEmergenciaGeneral()
         {
-            EstadoActual = Estado.EnCurso;
+            return NivelDificultad >= UMBRAL_EMERGENCIA_GENERAL;
+        }
+
+        public void IniciarIncidente()
+        {
+            if (EstadoActual == EstadoIncidente.NoHecho)
+            {
+                EstadoActual = EstadoIncidente.EnCurso;
+            }
+        }
+
+        public void FinalizarIncidente()
+        {
+            if (EstadoActual == EstadoIncidente.EnCurso)
+            {
+                EstadoActual = EstadoIncidente.Hecho;
+            }
         }
     }
-
-
-    // Función 2: pasar de EnCurso a Hecho
-    public void FinalizarIncidente()
-    {
-        if (EstadoActual == Estado.EnCurso)
-        {
-            EstadoActual = Estado.Hecho;
-        }
-    }
-}

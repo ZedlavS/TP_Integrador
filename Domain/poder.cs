@@ -1,15 +1,14 @@
 public class Poder
 {
-    public nivelPoder Nivel { get; set; }
-    public string Tipo { get; set; }
-
+    public int Id { get; set; }
     public string Nombre { get; set; }
+    public string Tipo { get; set; } // Ejemplo: Fuerza, Velocidad, Telekinesis, Vuelo
 
-}
+    public Poder() { }
 
-public enum nivelPoder
-{
-    Bajo,
-    Medio,
-    Alto
+    public Poder(string nombre, string tipo)
+    {
+        Nombre = nombre;
+        Tipo = tipo;
+    }
 }
