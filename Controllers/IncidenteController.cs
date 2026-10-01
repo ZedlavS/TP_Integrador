@@ -1,45 +1,103 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TuProyecto.Dominio;
+using TuProyecto.Servicios;
 
-
-[ApiController]
-[Route("api/[controller]")]
-public class IncidenteController : ControllerBase
+namespace TuProyecto.Controllers
 {
-    [HttpGet]
-    public ActionResult<IEnumerable<Incidente>> GetAll()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class IncidenteController : ControllerBase
     {
-        return Ok(new List<Incidente>());
-    }
+        private readonly IncidenteService _incidenteService;
 
-    [HttpGet("{id}")]
-    public ActionResult<Incidente> GetById(int id)
-    {
-        return Ok();
-    }
+        public IncidenteController(IncidenteService incidenteService)
+        {
+            _incidenteService = incidenteService;
+        }
 
-    [HttpPost]
-    public ActionResult<Incidente> RegistrarIncidente([FromBody] Incidente nuevoIncidente)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+        [HttpGet]
+        public ActionResult<IEnumerable<Incidente>> GetAll()
+        {
+            return Ok(_incidenteService.ObtenerTodos());
+        }
 
-        // TODO: Persistir el nuevo incidente
-        return CreatedAtAction(nameof(GetById), new { id = nuevoIncidente.Id }, nuevoIncidente);
-    }
+        [HttpGet("{id}")]
+        public ActionResult<Incidente> GetById(int id)
+        {
+            try
+            {
+                var incidente = _incidenteService.ObtenerPorId(id);
+                return Ok(incidente);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
 
-    [HttpPatch("{id}/iniciar")]
-    public IActionResult Iniciar(int id)
-    {
-        // TODO: Obtener incidente y ejecutar incidente.IniciarIncidente();
-        return Ok(new { Mensaje = $"Incidente {id} iniciado (EnCurso)." });
-    }
+        [HttpPost]
+        public ActionResult<Incidente> RegistrarIncidente([FromBody] Incidente nuevoIncidente)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-    [HttpPatch("{id}/finalizar")]
-    public IActionResult Finalizar(int id)
-    {
-        // TODO: Obtener incidente y ejecutar incidente.FinalizarIncidente();
-        return Ok(new { Mensaje = $"Incidente {id} marcado como Hecho." });
+            var creado = _incidenteService.CrearIncidente(nuevoIncidente);
+            return CreatedAtAction(nameof(GetById), new { id = creado.Id }, creado);
+        }
+
+        [HttpPatch("{id}/iniciar")]
+        public IActionResult Iniciar(int id)
+        {
+            try
+            {
+                _incidenteService.IniciarIncidente(id);
+                return Ok(new { mensaje = $"Incidente {id} iniciado (EnCurso)." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
+        [HttpPost("{id}/resolver")]
+        public IActionResult Resolver(int id, [FromBody] List<int> equiposIds)
+        {
+            try
+            {
+                _incidenteService.AsignarYResolverIncidente(id, equiposIds);
+                return Ok(new { mensaje = $"Incidente {id} fue asignado y resuelto con éxito." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
+
+        [HttpPatch("{id}/finalizar")]
+        public IActionResult Finalizar(int id)
+        {
+            try
+            {
+                _incidenteService.FinalizarIncidente(id);
+                return Ok(new { mensaje = $"Incidente {id} marcado como Hecho." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { mensaje = ex.Message });
+            }
+        }
     }
 }

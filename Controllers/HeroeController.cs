@@ -1,47 +1,63 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TuProyecto.Dominio;
+using TuProyecto.Servicios;
 
-[ApiController]
-[Route("api/[controller]")]
-public class HeroeController : ControllerBase
+namespace TuProyecto.Controllers
 {
-    // NOTA: Cuando conectes la base de datos, inyectarás un DbContext o un Servicio aquí.
-    
-    [HttpGet]
-    public ActionResult<IEnumerable<Heroe>> GetAll()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HeroeController : ControllerBase
     {
-        return Ok(new List<Heroe>());
-    }
+        private readonly HeroeService _heroeService;
 
-    [HttpGet("{id}")]
-    public ActionResult<Heroe> GetById(int id)
-    {
-        // TODO: Buscar héroe por Id
-        return Ok();
-    }
+        public HeroeController(HeroeService heroeService)
+        {
+            _heroeService = heroeService;
+        }
 
-    [HttpPost]
-    public ActionResult<Heroe> Create([FromBody] Heroe nuevoHeroe)
-    {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+        [HttpGet]
+        public ActionResult<IEnumerable<Heroe>> GetAll()
+        {
+            return Ok(_heroeService.ObtenerTodos());
+        }
 
-        // TODO: Guardar en repositorio/base de datos
-        return CreatedAtAction(nameof(GetById), new { id = nuevoHeroe.Id }, nuevoHeroe);
-    }
+        [HttpGet("{id}")]
+        public ActionResult<Heroe> GetById(int id)
+        {
+            try
+            {
+                var heroe = _heroeService.ObtenerPorId(id);
+                return Ok(heroe);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
 
-    [HttpPatch("{id}/recibir-dano")]
-    public IActionResult RecibirDano(int id)
-    {
-        // TODO: Obtener héroe y ejecutar heroe.RecibirDaño();
-        return Ok(new { Mensaje = $"El héroe con ID {id} ha sido marcado como Herido." });
-    }
+        [HttpPost]
+        public ActionResult<Heroe> Create([FromBody] Heroe nuevoHeroe)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-    [HttpPatch("{id}/recuperar")]
-    public IActionResult Recuperar(int id)
-    {
-        // TODO: Obtener héroe y ejecutar heroe.Recuperar();
-        return Ok(new { Mensaje = $"El héroe con ID {id} ha recuperado su estado Disponible." });
+            var heroeCreado = _heroeService.CrearHeroe(nuevoHeroe);
+            return CreatedAtAction(nameof(GetById), new { id = heroeCreado.Id }, heroeCreado);
+        }
+
+        [HttpPost("{id}/recuperar")]
+        public IActionResult Recuperar(int id)
+        {
+            try
+            {
+                _heroeService.RecuperarHeroe(id);
+                return Ok(new { mensaje = $"El héroe con ID {id} se recuperó exitosamente y se encuentra disponible." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { mensaje = ex.Message });
+            }
+        }
     }
 }
