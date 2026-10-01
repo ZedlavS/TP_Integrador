@@ -3,6 +3,7 @@ namespace TuProyecto.Dominio
     public enum EstadoHeroe
     {
         Disponible,
+        EnMision,
         Inactivo,
         Herido
     }
